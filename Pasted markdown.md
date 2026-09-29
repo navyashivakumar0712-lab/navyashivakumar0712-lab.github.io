@@ -1,0 +1,997 @@
+```
+<style>
+    :root {
+        --primary: #4f46e5;
+        --primary-dark: #3730a3;
+        --primary-light: #eef2ff;
+        --navy: #0f172a;
+        --text: #334155;
+        --muted: #64748b;
+        --background: #f8fafc;
+        --white: #ffffff;
+        --border: #e2e8f0;
+        --success: #15803d;
+        --max-width: 1120px;
+        --radius: 16px;
+        --shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+        --shadow-hover: 0 12px 30px rgba(15, 23, 42, 0.09);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 90px;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.7;
+        color: var(--text);
+        background: var(--background);
+        -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+        color: inherit;
+    }
+
+    a:focus-visible {
+        outline: 3px solid rgba(79, 70, 229, 0.35);
+        outline-offset: 4px;
+    }
+
+    .container {
+        width: min(100% - 40px, var(--max-width));
+        margin: 0 auto;
+    }
+
+    section {
+        padding: 90px 0;
+    }
+
+    .section-header {
+        max-width: 720px;
+        margin-bottom: 42px;
+    }
+
+    .section-label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--primary);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    .section-title {
+        margin-bottom: 12px;
+        color: var(--navy);
+        font-size: clamp(1.9rem, 4vw, 2.5rem);
+        line-height: 1.2;
+    }
+
+    .section-description {
+        color: var(--muted);
+    }
+
+    /* Navigation */
+
+    .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.97);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(12px);
+    }
+
+    .nav {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    .logo {
+        color: var(--navy);
+        text-decoration: none;
+        font-size: 1.25rem;
+        font-weight: 800;
+        white-space: nowrap;
+    }
+
+    .logo span {
+        color: var(--primary);
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 5px;
+        list-style: none;
+    }
+
+    .nav-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 42px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 600;
+        transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+        color: var(--primary);
+        background: var(--primary-light);
+    }
+
+    /* Hero */
+
+    .hero {
+        padding: 115px 0 105px;
+        background:
+            radial-gradient(circle at 85% 15%, rgba(79, 70, 229, 0.12), transparent 28%),
+            radial-gradient(circle at 10% 80%, rgba(99, 102, 241, 0.08), transparent 30%),
+            var(--white);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .hero-content {
+        max-width: 820px;
+    }
+
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 22px;
+        padding: 7px 13px;
+        background: var(--primary-light);
+        border: 1px solid #c7d2fe;
+        border-radius: 999px;
+        color: var(--primary-dark);
+        font-size: 0.82rem;
+        font-weight: 700;
+    }
+
+    .hero h1 {
+        margin-bottom: 24px;
+        color: var(--navy);
+        font-size: clamp(2.5rem, 6vw, 4.6rem);
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+    }
+
+    .hero h1 span {
+        color: var(--primary);
+    }
+
+    .hero-description {
+        max-width: 700px;
+        margin-bottom: 34px;
+        color: var(--muted);
+        font-size: clamp(1rem, 2vw, 1.15rem);
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 10px 18px;
+        border: 1px solid transparent;
+        border-radius: 9px;
+        text-decoration: none;
+        font-size: 0.94rem;
+        font-weight: 700;
+        transition: 0.2s ease;
+    }
+
+    .button-primary {
+        color: #ffffff;
+        background: var(--primary);
+        box-shadow: 0 5px 14px rgba(79, 70, 229, 0.2);
+    }
+
+    .button-primary:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+    }
+
+    .button-secondary {
+        color: var(--navy);
+        background: var(--white);
+        border-color: var(--border);
+    }
+
+    .button-secondary:hover {
+        color: var(--primary-dark);
+        background: var(--primary-light);
+        border-color: #c7d2fe;
+        transform: translateY(-1px);
+    }
+
+    /* About */
+
+    .about {
+        background: var(--white);
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+    }
+
+    .info-card {
+        height: 100%;
+        padding: 30px;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+    }
+
+    .info-card h3 {
+        margin-bottom: 12px;
+        color: var(--navy);
+        font-size: 1.18rem;
+    }
+
+    .info-card p {
+        color: var(--muted);
+    }
+
+    /* Activities */
+
+    .activities {
+        background: var(--background);
+    }
+
+    .activities-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+    }
+
+    .activity-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 30px;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        transition: 0.2s ease;
+    }
+
+    .activity-card:hover {
+        transform: translateY(-3px);
+        border-color: #c7d2fe;
+        box-shadow: var(--shadow-hover);
+    }
+
+    .activity-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        margin-bottom: 20px;
+        background: var(--primary-light);
+        border-radius: 10px;
+        color: var(--primary-dark);
+        font-size: 0.9rem;
+        font-weight: 800;
+    }
+
+    .activity-card h3 {
+        margin-bottom: 12px;
+        color: var(--navy);
+        font-size: 1.2rem;
+        line-height: 1.35;
+    }
+
+    .activity-card p {
+        color: var(--muted);
+        font-size: 0.96rem;
+    }
+
+    .activity-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        width: fit-content;
+        margin-top: auto;
+        padding-top: 22px;
+        color: var(--primary-dark);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 700;
+        overflow-wrap: anywhere;
+    }
+
+    .activity-link::after {
+        content: "↗";
+        transition: 0.2s ease;
+    }
+
+    .activity-link:hover {
+        text-decoration: underline;
+    }
+
+    .activity-link:hover::after {
+        transform: translate(2px, -2px);
+    }
+
+    .activity-link.no-link {
+        color: var(--muted);
+        cursor: default;
+    }
+
+    .activity-link.no-link::after {
+        display: none;
+    }
+
+    /* Skills */
+
+    .skills {
+        background: var(--white);
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .skill {
+        display: flex;
+        align-items: center;
+        min-height: 58px;
+        padding: 14px 17px;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 11px;
+        color: var(--navy);
+        font-size: 0.91rem;
+        font-weight: 650;
+        transition: 0.2s ease;
+    }
+
+    .skill:hover {
+        background: var(--primary-light);
+        border-color: #c7d2fe;
+    }
+
+    /* Career */
+
+    .career {
+        background: var(--background);
+    }
+
+    .career-card {
+        padding: 36px;
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+    }
+
+    .career-card > p {
+        max-width: 900px;
+        margin-bottom: 26px;
+        color: var(--muted);
+    }
+
+    .goal-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px 28px;
+        list-style: none;
+    }
+
+    .goal-list li {
+        position: relative;
+        padding-left: 27px;
+        color: var(--text);
+        font-size: 0.95rem;
+    }
+
+    .goal-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: 1px;
+        color: var(--success);
+        font-weight: 800;
+    }
+
+    /* Contact */
+
+    .contact {
+        background: var(--white);
+    }
+
+    .contact-card {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 50px 36px;
+        text-align: center;
+        background: linear-gradient(135deg, #eef2ff 0%, #ffffff 65%);
+        border: 1px solid #c7d2fe;
+        border-radius: var(--radius);
+    }
+
+    .contact-card h2 {
+        margin-bottom: 12px;
+        color: var(--navy);
+        font-size: clamp(1.7rem, 4vw, 2.3rem);
+        line-height: 1.25;
+    }
+
+    .contact-card p {
+        max-width: 620px;
+        margin: 0 auto;
+        color: var(--muted);
+    }
+
+    /* Footer */
+
+    .site-footer {
+        padding: 28px 0;
+        background: var(--navy);
+        color: #cbd5e1;
+    }
+
+    .footer-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 50px;
+        text-align: center;
+    }
+
+    .footer-content p {
+        font-size: 0.88rem;
+    }
+
+    /* Tablet */
+
+    @media (max-width: 900px) {
+        .nav {
+            gap: 16px;
+        }
+
+        .nav-links {
+            gap: 2px;
+        }
+
+        .nav-links a {
+            padding: 8px 9px;
+            font-size: 0.86rem;
+        }
+
+        .skills-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+
+    /* Mobile */
+
+    @media (max-width: 760px) {
+        html {
+            scroll-padding-top: 125px;
+        }
+
+        .nav {
+            min-height: auto;
+            padding: 14px 0;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+
+        .logo {
+            text-align: center;
+        }
+
+        .nav-links {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            min-height: 38px;
+            padding: 6px 8px;
+            font-size: 0.8rem;
+        }
+
+        .hero {
+            padding: 78px 0 72px;
+        }
+
+        section {
+            padding: 68px 0;
+        }
+
+        .about-grid,
+        .activities-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .skills-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .goal-list {
+            grid-template-columns: 1fr;
+        }
+
+        .career-card {
+            padding: 28px;
+        }
+    }
+
+    /* Small mobile */
+
+    @media (max-width: 480px) {
+        .container {
+            width: min(100% - 28px, var(--max-width));
+        }
+
+        .hero {
+            padding: 62px 0 58px;
+        }
+
+        .hero h1 {
+            font-size: 2.45rem;
+        }
+
+        .hero-description {
+            font-size: 0.96rem;
+        }
+
+        .hero-actions {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .button {
+            width: 100%;
+        }
+
+        section {
+            padding: 56px 0;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+        }
+
+        .info-card,
+        .activity-card {
+            padding: 24px;
+        }
+
+        .skills-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .skill {
+            min-height: 52px;
+        }
+
+        .career-card {
+            padding: 24px;
+        }
+
+        .contact-card {
+            padding: 38px 22px;
+        }
+    }
+
+    /* Reduced motion */
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            transition-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+        }
+    }
+</style>
+```
+
+```
+<header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+
+        <a class="logo" href="#home" aria-label="Navyashree P.S. home">
+            Navyashree<span>.</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#activities">Activities</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#career">Career Goal</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+    </nav>
+</header>
+
+<main>
+
+    <section class="hero" id="home">
+        <div class="container">
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    3rd Semester B.Tech CSIT Student
+                </p>
+
+                <h1>
+                    Hi, I’m <span>Navyashree P.S.</span>
+                </h1>
+
+                <p class="hero-description">
+                    I am interested in software development, programming,
+                    and problem solving. I am currently learning C++,
+                    Data Structures, DBMS, Object-Oriented Programming,
+                    and Web Application Development.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#activities">
+                        View My Activities
+                    </a>
+
+                    <a class="button button-secondary" href="#contact">
+                        Contact
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="about" id="about">
+        <div class="container">
+
+            <div class="section-header">
+                <span class="section-label">About</span>
+
+                <h2 class="section-title">
+                    My Learning Journey
+                </h2>
+
+                <p class="section-description">
+                    A brief introduction to my interests and current academic learning.
+                </p>
+            </div>
+
+            <div class="about-grid">
+
+                <article class="info-card">
+                    <h3>Who I Am</h3>
+
+                    <p>
+                        I am a 3rd Semester B.Tech CSIT student interested
+                        in software development, programming, and problem solving.
+                    </p>
+                </article>
+
+                <article class="info-card">
+                    <h3>What I Am Learning</h3>
+
+                    <p>
+                        I am currently learning C++, Data Structures, DBMS,
+                        Object-Oriented Programming, and Web Application Development.
+                    </p>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="activities" id="activities">
+        <div class="container">
+
+            <div class="section-header">
+                <span class="section-label">
+                    Projects & Activities
+                </span>
+
+                <h2 class="section-title">
+                    My Activities
+                </h2>
+
+                <p class="section-description">
+                    A record of my learning activities, programming practice,
+                    collaboration, and GitHub work.
+                </p>
+            </div>
+
+            <div class="activities-grid">
+
+                <article class="activity-card">
+
+                    <div class="activity-number" aria-hidden="true">
+                        01
+                    </div>
+
+                    <h3>
+                        Activity 1 – Hello World Repository
+                    </h3>
+
+                    <p>
+                        I created a simple Hello World repository as one of my
+                        initial GitHub activities. It helped me become familiar
+                        with GitHub repositories and the basic idea of storing
+                        and sharing coding work online.
+                    </p>
+
+                    <a
+                        class="activity-link"
+                        href="https://github.com/navyashivakumar0712-lab/Activity-1-Dev-Environment-Setup"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View Activity 1 Hello World Repository on GitHub"
+                    >
+                        View GitHub Repository
+                    </a>
+
+                </article>
+
+
+                <article class="activity-card">
+
+                    <div class="activity-number" aria-hidden="true">
+                        02
+                    </div>
+
+                    <h3>
+                        Activity 2 – Pair Programming and Collaboration
+                    </h3>
+
+                    <p>
+                        I worked with another student on a coding task.
+                        This activity helped me understand collaborative
+                        programming, communication, sharing ideas, and teamwork.
+                    </p>
+
+                    <span class="activity-link no-link">
+                        Collaboration Activity
+                    </span>
+
+                </article>
+
+
+                <article class="activity-card">
+
+                    <div class="activity-number" aria-hidden="true">
+                        03
+                    </div>
+
+                    <h3>
+                        Activity 3 – GitHub Collaboration Tools
+                    </h3>
+
+                    <p>
+                        I learned about Git and GitHub collaboration tools,
+                        repositories, version control, and managing changes
+                        while working on programming activities.
+                    </p>
+
+                    <span class="activity-link no-link">
+                        GitHub Learning Activity
+                    </span>
+
+                </article>
+
+
+                <article class="activity-card">
+
+                    <div class="activity-number" aria-hidden="true">
+                        04
+                    </div>
+
+                    <h3>
+                        Activity 4 – LeetCode Practice Repository
+                    </h3>
+
+                    <p>
+                        I worked on a LeetCode solutions repository to document
+                        my programming and problem-solving practice. I practised
+                        problems involving concepts such as arrays and strings
+                        and maintained my solutions on GitHub.
+                    </p>
+
+                    <a
+                        class="activity-link"
+                        href="https://github.com/navyashivakumar0712-lab/leetcode-solutions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="View Activity 4 LeetCode Practice Repository on GitHub"
+                    >
+                        View GitHub Repository
+                    </a>
+
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="skills" id="skills">
+        <div class="container">
+
+            <div class="section-header">
+                <span class="section-label">
+                    Skills
+                </span>
+
+                <h2 class="section-title">
+                    What I Am Building
+                </h2>
+
+                <p class="section-description">
+                    Technical and professional skills I am currently learning and developing.
+                </p>
+            </div>
+
+            <div class="skills-grid" aria-label="Skills">
+
+                <div class="skill">C Programming</div>
+
+                <div class="skill">C++ Programming</div>
+
+                <div class="skill">Problem Solving</div>
+
+                <div class="skill">Data Structures</div>
+
+                <div class="skill">Object-Oriented Programming</div>
+
+                <div class="skill">DBMS and SQL</div>
+
+                <div class="skill">Git and GitHub</div>
+
+                <div class="skill">
+                    Basic Web Application Development
+                </div>
+
+                <div class="skill">Communication</div>
+
+                <div class="skill">Teamwork</div>
+
+                <div class="skill">Collaboration</div>
+
+                <div class="skill">Independent Learning</div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="career" id="career">
+        <div class="container">
+
+            <div class="section-header">
+
+                <span class="section-label">
+                    Career & Learning Goal
+                </span>
+
+                <h2 class="section-title">
+                    Looking Ahead
+                </h2>
+
+                <p class="section-description">
+                    My current focus is on strengthening my programming
+                    foundation and continuing to learn through practical work.
+                </p>
+
+            </div>
+
+            <div class="career-card">
+
+                <p>
+                    My current goal is to become stronger in programming and
+                    problem solving and prepare myself for future software
+                    development internships and placement opportunities.
+                    I want to continue practising coding, learning Data
+                    Structures and C++, building practical projects, and
+                    maintaining my work on GitHub.
+                </p>
+
+                <ul class="goal-list">
+
+                    <li>Practising coding</li>
+
+                    <li>Learning Data Structures and C++</li>
+
+                    <li>Building practical projects</li>
+
+                    <li>Maintaining my work on GitHub</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="contact" id="contact">
+        <div class="container">
+
+            <div class="contact-card">
+
+                <h2>
+                    Thank You for Visiting
+                </h2>
+
+                <p>
+                    Thank you for taking the time to explore my portfolio
+                    and learning journey.
+                </p>
+
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container footer-content">
+
+        <p>
+            &copy; Navyashree P.S. — 3rd Semester B.Tech CSIT Student
+        </p>
+
+    </div>
+
+</footer>
+```
